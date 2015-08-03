@@ -1,0 +1,31 @@
+{
+  "name": "clubeviva-labs",
+  "version": "0.0.0",
+  "private": true,
+  "authors": [
+    "Guilherme Severo <guilherme.severo@huia.com.br>"
+  ],
+  "description": "O Boticario - App de pesquisa e desenvolvimento de novas tecnologias para o Clube Viva",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "nodejs",
+    "clubeviva",
+    "boticario"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "socket.io": "~1.3.5",
+    "underscore": "~1.8.3",
+    "bootstrap": "~3.3.4"
+  }
+}

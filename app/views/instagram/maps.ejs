@@ -1,0 +1,38 @@
+<div id="google-maps-canvas"></div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG5nl0KVUWrI-XKX2e9C3Fh1Df126OgiA"></script>
+<script type="text/javascript">
+var marker, circle, map;
+
+var socket = io.connect('/');
+socket.on('photo_map', function(data) {
+
+    if (data.media.location) {
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data.media.location.latitude, data.media.location.longitude),
+            map: map,
+            icon: data.media.images.thumbnail
+        });
+    }
+    console.log(data);
+});
+
+socket.on('test', function(data) {
+    console.log(data);
+});
+
+function initialize() {
+    var mapOptions = {
+        center: {
+            lat:  15.580710739162123,
+            lng: -31.9921875
+        },
+        zoom: 3
+    };
+
+    map = new google.maps.Map(document.getElementById('google-maps-canvas'), mapOptions);
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HUIA LABS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+      html, body{
+       height: 100%;
+       margin: 0;
+       padding: 0;
+     }
+
+     #map-canvas {
+        height: 300px;
+        width:  600px;
+        padding: 20px;
+     }
+     #form{
+      display: block;
+     }
+     .geography-group{
+        display: table;
+     }
+     .geo-inputs {
+       width: 300px;
+     }
+
+     .geo-inputs,
+     .map-canvas {
+       float: left;
+     }
+
+     #google-maps-canvas{
+        height: 550px;
+        width: 1024px;
+        margin: 0 auto;
+     }
+     .menu{
+
+     }
+     .menu li {
+        display: inline-block;
+     }
+</style>
+</head>
+
+<body>
+<ul class="menu">
+  <li><a href="/instagram/maps">Maps</a></li>
+  <li><a href="/instagram/subscriptions">Subscriptions</a></li>
+</ul>
+  <h1>HUIA LABS</h1>
+  	<%-body%>
+
+  	
+  	<script src="/components/jquery/dist/jquery.js" type="text/javascript"></script>
+  	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  	<!-- scripts que vem das views -->
+  	<%- script %>
+  </body>
+</html>
