@@ -11,7 +11,7 @@ var http = require('http'),
     pluralize = require('pluralize'),
     instagram_api = require('../services/instagram_api');
 
-mongoose.connect(process.env.MONGOHQ_URL || config.db.mongo_url);
+mongoose.connect(config.db.mongo_url);
 
 
 exports.get_maps = function(req, res) {

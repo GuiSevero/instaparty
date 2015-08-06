@@ -36,6 +36,10 @@ router.post('/login',
 //Home
 router.get('/', authorize, controllers.instagram.get_index)
 
+//Photos
+router.get('/photos', authorize, controllers.photos.get_index)
+router.post('/photos', authorize, controllers.photos.post_index)
+
 //Instagram
 router.get('/instagram/', controllers.instagram.get_index)
 router.get('/instagram/subscribe', controllers.instagram.get_subscribe)

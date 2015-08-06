@@ -1,15 +1,14 @@
-var local = require("./default");
 var resolve = require('path').resolve;
 
 exports.public_dir = resolve(__dirname, '../../public');
 exports.view_dir = resolve(__dirname, '../views');
 
 
-exports.port = process.env.PORT || local.port;
+exports.port = process.env.PORT;
 
 exports.instagram = {
-    client_id: process.env.INSTA_APP_ID || local.instagram.client_id,
-    client_secret: process.env.INSTA_APP_SECRET || local.instagram.client_secret,
+    client_id: process.env.INSTA_APP_ID,
+    client_secret: process.env.INSTA_APP_SECRET,
     api: {
         url: "https://api.instagram.com/v1/",
         subscriptions: "https://api.instagram.com/v1/subscriptions",
@@ -22,11 +21,13 @@ exports.instagram = {
 };
 
 exports.db = {
-    mongo_url: process.env.MONGOHQ_URL || local.db.mongo_url
+    mongo_url: process.env.MONGOLAB_URI
 };
 
-exports.cookie = {
-    secret: process.env.COOKIE_SECRET || local.cookie.secret
+exports.cloudinary = {
+    url: process.env.CLOUDINARY_URL
 }
 
-exports.google = local.google;
+exports.cookie = {
+    secret: process.env.COOKIE_SECRET
+}

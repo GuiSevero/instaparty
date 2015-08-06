@@ -3,3 +3,4 @@
 /public/components
 *.log
 .idea/
+.env
