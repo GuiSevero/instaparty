@@ -34,7 +34,7 @@ router.post('/login',
 
 
 //Home
-router.get('/', authorize, controllers.instagram.get_index)
+router.get('/', controllers.instagram.get_index)
 
 //Photos
 router.get('/photos', authorize, controllers.photos.get_index)
