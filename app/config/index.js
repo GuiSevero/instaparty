@@ -16,7 +16,7 @@ exports.instagram = {
         locations: "https://api.instagram.com/v1/locations",
         geographies: "https://api.instagram.com/v1/geographies",
         users: "https://api.instagram.com/v1/users",
-        callback_url: "https://instagurizada.herokuapp.com/subscribe"
+        callback_url: "https://instaparty.herokuapp.com/instagram/subscribe"
     }
 };
 
