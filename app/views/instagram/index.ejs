@@ -6,60 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Le styles -->
- <link href="css/bootstrap.css" rel="stylesheet">
- <link href="css/bootstrap-responsive.css" rel="stylesheet">
- <link rel="stylesheet" type="text/css" href="/vegas/jquery.vegas.css" />
+ <link rel="stylesheet" type="text/css" href="/components/vegas/dist/vegas.css" />
+ <link rel="stylesheet" type="text/css" href="/styles/main.css" />
 </head>
-
 <body>
-<body>
-    <div id="background">
-    </div>
-</body>
-
+<div class="homepage">
+    <div id="insta-slider" class="homepage-header vegas-container"></div>
+  </div>
   <!-- Scripts -->
   <script src="/components/jquery/dist/jquery.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-  <script type="text/javascript" src="/vegas/jquery.vegas.js"></script>
-
-
-<script type="text/javascript"> 
-
-       $.get('/instagram/photos', function(data){
-          var photos = $.map(data, function(item){
-              return {
-                src: item.url,
-                fade: 1500
-              }
-          });
-          $.vegas('slideshow',{backgrounds: photos});
-
-       });
-
-      var socket = io.connect('/');
-      socket.on('photo', function(data){
-
-          console.log(data);
-
-          var prevStep = $.vegas('get', 'step');
-
-          $.vegas('slideshow',{backgrounds: [{src: data.url, fade: 1500}]});
-          setTimeout(function(){
-               $.get('/photos', function(data){
-                  var photos = $.map(data, function(item){
-                      return {
-                        src: item.url,
-                        fade: 1500
-                      }
-                  });
-                  $.vegas('slideshow',{backgrounds: photos});
-                  $.vegas('jump', prevStep);
-               });
-          }, 10000);
-
-      });
-    </script>
-
+  <script type="text/javascript" src="/components/vegas/dist/vegas.js"></script>
+  <script type="text/javascript" src="/scripts/main.js"></script>
   </body>
 </html>
