@@ -200,15 +200,7 @@ exports.get_index = function(req, res) {
 exports.get_photos = function(req, res) {
     Photo.find({}, function(err, documents) {
         if (err) res.send(500);
-        var output = _.map(documents, function(document) {
-
-            return {
-                title: document.title,
-                image: document.url,
-                src: document.url,
-                url: document.url,
-            }
-        });
-        res.send(output);
+       
+        res.send(documents);
     });
 };

@@ -1,5 +1,5 @@
 var users = {
-    'grsevero': 'gorder',
+    'grsevero@gmail.com': 'gorder',
     'admin ': 'pampastorm',
 };
 
