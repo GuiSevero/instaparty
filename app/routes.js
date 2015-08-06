@@ -4,6 +4,8 @@ var controllers = require('./controllers')
 var passport = require('passport')
 var huia_auth = require('./services/huia_auth')
 var LocalStrategy = require('passport-local').Strategy
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 
 passport.use(new LocalStrategy(
@@ -29,7 +31,7 @@ router.post('/login',
         successRedirect: '/'
     }),
     function(req, res) {
-        res.redirect('/')
+        res.redirect('/photos')
     })
 
 
@@ -37,8 +39,8 @@ router.post('/login',
 router.get('/', controllers.instagram.get_index)
 
 //Photos
-router.get('/photos', authorize, controllers.photos.get_index)
-router.post('/photos', authorize, controllers.photos.post_index)
+router.get('/photos', authorize, upload.array('image'), controllers.photos.get_index)
+router.post('/photos', authorize, upload.array('image'), controllers.photos.post_index)
 
 //Instagram
 router.get('/instagram/', controllers.instagram.get_index)
