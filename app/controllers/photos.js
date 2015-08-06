@@ -27,6 +27,8 @@ exports.post_index = function(req, res) {
               var photo = new Photo({
                   src: result.url,
                   url: result.url,
+                  width: result.width,
+                  height: result.height,
                   type: "upload",
                   media: result
               });

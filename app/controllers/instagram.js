@@ -22,10 +22,10 @@ exports.get_maps = function(req, res) {
 
 
 exports.post_maps = function(req, res) {
-    
+
     // request.body is a JSON already parsed
     req.body.forEach(function(notificationOjb) {
-        
+
 
         https.get({
             host: 'api.instagram.com',
@@ -48,15 +48,16 @@ exports.post_maps = function(req, res) {
                 if (response['data'].length > 0) {
 
                     for (i in response.data) {
-
                         var instagram_notif = new Photo({
-                            subscription_id: notificationOjb.subscription_id,
-                            object: notificationOjb.object,
-                            object_id: notificationOjb.object_id,
-                            changed_aspect: notificationOjb.changed_aspect,
-                            time: notificationOjb.time,
+                            src: response.data[i].images.standard_resolution.url,
                             url: response.data[i].images.standard_resolution.url,
-                            media: response.data[i]
+                            width: 640,
+                            height: 480,
+                            type: "instagram",
+                            media: {
+                              notification: notificationOjb,
+                              data: response.data[i]
+                            }
                         });
                         global.io.sockets.emit('photo_map', instagram_notif);
 
@@ -123,7 +124,7 @@ exports.post_subscribe = function(request, response) {
     request.body.forEach(function(notificationOjb) {
         // Every notification object contains the id of the geography
         // that has been updated, and the photo can be obtained from
-        // that geography   
+        // that geography
 
         https.get({
             host: 'api.instagram.com',
@@ -151,13 +152,15 @@ exports.post_subscribe = function(request, response) {
                     for (i in response.data) {
 
                         var instagram_notif = new Photo({
-                            subscription_id: notificationOjb.subscription_id,
-                            object: notificationOjb.object,
-                            object_id: notificationOjb.object_id,
-                            changed_aspect: notificationOjb.changed_aspect,
-                            time: notificationOjb.time,
+                            src: response.data[i].images.standard_resolution.url,
                             url: response.data[i].images.standard_resolution.url,
-                            media: response.data[i]
+                            width: 640,
+                            height: 480,
+                            type: "instagram",
+                            media: {
+                              notification: notificationOjb,
+                              data: response.data[i]
+                            }
                         });
 
                         //Previne duplicatas
@@ -200,7 +203,7 @@ exports.get_index = function(req, res) {
 exports.get_photos = function(req, res) {
     Photo.find({}, function(err, documents) {
         if (err) res.send(500);
-       
+
         res.send(documents);
     });
 };

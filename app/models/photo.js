@@ -5,5 +5,7 @@ module.exports = mongoose.model('Photo', {
     url: "string",
     src: "string",
     type: "string",
+    width: "number",
+    height: "number",
     media: mongoose.Schema.Types.Mixed
 });
