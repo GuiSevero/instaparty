@@ -125,14 +125,15 @@ exports.post_subscribe = function(request, response) {
         // Every notification object contains the id of the geography
         // that has been updated, and the photo can be obtained from
         // that geography
-
+        var url_path = '/v1/' + pluralize(notificationOjb.object) + '/' + notificationOjb.object_id + '/media/recent' +
+            '?' + querystring.stringify({
+                client_id: config.instagram.client_id,
+                count: 10
+            });
+      console.log(url_path);
         https.get({
             host: 'api.instagram.com',
-            path: '/v1/' + pluralize(notificationOjb.object) + '/' + notificationOjb.object_id + '/media/recent' +
-                '?' + querystring.stringify({
-                    client_id: config.instagram.client_id,
-                    count: 5
-                }),
+            path: url_path,
         }, function(res) {
 
             var raw = "";
@@ -154,8 +155,8 @@ exports.post_subscribe = function(request, response) {
                         var instagram_notif = new Photo({
                             src: response.data[i].images.standard_resolution.url,
                             url: response.data[i].images.standard_resolution.url,
-                            width: 640,
-                            height: 480,
+                            width: response.data[i].images.standard_resolution.width,
+                            height: response.data[i].images.standard_resolution.height,
                             type: "instagram",
                             media: {
                               notification: notificationOjb,
