@@ -16,7 +16,7 @@
  var socket = io.connect('/');
  socket.on('photo', function(data) {
 
-     var prevStep = $.vegas('get', 'step');
+     var prevStep = $('#insta-slider').vegas('current');
 
      $('#insta-slider').vegas({
          slides: [{
