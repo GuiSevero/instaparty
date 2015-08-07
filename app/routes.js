@@ -28,7 +28,7 @@ router.get('/login', controllers.login.get_login)
 router.post('/login',
     passport.authenticate('local', {
         failureRedirect: '/login',
-        successRedirect: '/'
+        successRedirect: '/photos'
     }),
     function(req, res) {
         res.redirect('/photos')
