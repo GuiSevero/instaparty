@@ -112,11 +112,10 @@ exports.get_subscribe = function(req, res) {
 
 
 exports.post_subscribe = function(request, response) {
-
+  console.log(request.body);
   if(!request.body){
     console.log("Error 400 - Body not ok");
-    console.log(request.body);
-    return send(400);
+    return send(400, body);
   }
 
 

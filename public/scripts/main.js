@@ -26,7 +26,7 @@
          }]
      });
      setTimeout(function() {
-         $.get('/photos', function(data) {
+         $.get('/instagram/photos', function(data) {
              var photos = $.map(data, function(item) {
                  return {
                      src: item.url,
