@@ -15,6 +15,8 @@
 
  var socket = io.connect('/');
  socket.on('photo', function(data) {
+    console.log("Chegou foto");
+    console.log(data);
 
      var prevStep = $('#insta-slider').vegas('current');
 
