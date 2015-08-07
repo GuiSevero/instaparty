@@ -1,45 +1,33 @@
- $.get('/instagram/photos', function(data) {
-     var photos = $.map(data, function(item) {
-         return {
-             src: item.url,
-             fade: 1500
-         }
-     });
-     $('#insta-slider').vegas({
-         slides: photos,
-         cover: true,
-         fade: 5000
-     });
+$.get('/instagram/photos', function(data){
+   var photos = $.map(data, function(item){
+       return {
+         src: item.url,
+         fade: 1500
+       }
+   });
+   $.vegas('slideshow',{backgrounds: photos});
 
- });
+});
 
- var socket = io.connect('/');
- socket.on('photo', function(data) {
-    console.log("Chegou foto");
-    console.log(data);
+var socket = io.connect('/');
+socket.on('photo', function(data){
 
-     var prevStep = $('#insta-slider').vegas('current');
+   console.log(data);
 
-     $('#insta-slider').vegas({
-         slides: [{
-             src: data.url,
-             fade: 5000,
-             cover: true
-         }]
-     });
-     $.get('/instagram/photos', function(data) {
-         var photos = $.map(data, function(item) {
-             return {
+   var prevStep = $.vegas('get', 'step');
+
+   $.vegas('slideshow',{backgrounds: [{src: data.url, fade: 1500}]});
+   setTimeout(function(){
+        $.get('/instagram/photos', function(data){
+           var photos = $.map(data, function(item){
+               return {
                  src: item.url,
-                 fade: 5000
-             }
-         });
-         $('#insta-slider').vegas({
-             slides: photos,
-             cover: true,
-             fade: 5000
-         });
-         $('#insta-slider').vegas('jump', prevStep);
-     });
+                 fade: 1500
+               }
+           });
+           $.vegas('slideshow',{backgrounds: photos});
+           $.vegas('jump', prevStep);
+        });
+   }, 10000);
 
- });
+});
