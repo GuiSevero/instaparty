@@ -131,7 +131,7 @@ exports.post_subscribe = function(request, response) {
             path: '/v1/' + pluralize(notificationOjb.object) + '/' + notificationOjb.object_id + '/media/recent' +
                 '?' + querystring.stringify({
                     client_id: config.instagram.client_id,
-                    count: 1
+                    count: 5
                 }),
         }, function(res) {
 
