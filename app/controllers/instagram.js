@@ -112,12 +112,12 @@ exports.get_subscribe = function(req, res) {
 
 
 exports.post_subscribe = function(request, response) {
-  console.log(request.body);
   if(!request.body){
     console.log("Error 400 - Body not ok");
     return send(400, body);
   }
 
+  var canBroadCast = false;
 
     var log = new Log({
         data: request.body
@@ -134,7 +134,7 @@ exports.post_subscribe = function(request, response) {
         var url_path = '/v1/' + pluralize(notificationOjb.object) + '/' + notificationOjb.object_id + '/media/recent' +
             '?' + querystring.stringify({
                 client_id: config.instagram.client_id,
-                count: 10
+                count: 3
             });
       console.log(url_path);
         https.get({
@@ -180,7 +180,7 @@ exports.post_subscribe = function(request, response) {
                                     if (err) {
                                         console.log(err);
                                     } else {
-                                        global.io.sockets.emit('photo', instagram_notif);
+                                        canBroadCast = true;
                                         console.log(instagram_notif);
                                     }
                                 });
@@ -189,6 +189,10 @@ exports.post_subscribe = function(request, response) {
                         });
 
                     } //endfor
+
+                    //Notifica que há novas fotos
+                    if(canBroadCast)
+                      global.io.sockets.emit('photo', instagram_notif);
                 }
             });
 
